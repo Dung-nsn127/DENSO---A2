@@ -1,0 +1,218 @@
+[
+  {
+    "case_id": "DR-001",
+    "title": "Tín hiệu cảm biến vị trí không ổn định",
+    "machine": "Cụm gá lắp tự động",
+    "status": "approved",
+    "problem": "Tín hiệu cảm biến vị trí lúc có lúc không, chu kỳ máy dừng không đều.",
+    "context": "Phiên Design Review mô phỏng về lỗi tín hiệu không ổn định.",
+    "observations": [
+      {
+        "text": "Tín hiệu được mô tả là lúc có lúc không.",
+        "evidence": "Trước khi thay, kiểm tra lại giắc và vị trí gá xem có bị lệch không.",
+        "time": "00:01:14–00:01:32"
+      }
+    ],
+    "options": [
+      {
+        "name": "Kiểm tra giắc nối và vị trí gá trước",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Giúp kiểm tra các nguyên nhân có thể phát hiện được trước khi thay linh kiện."
+      },
+      {
+        "name": "Thay cảm biến ngay",
+        "status": "chưa chọn",
+        "reason": "Chưa có kết quả đo xác nhận cảm biến hỏng."
+      }
+    ],
+    "decision": "Kiểm tra kết nối, vị trí gá và trạng thái tín hiệu trước khi quyết định thay cảm biến.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Chưa có kết quả đo điện thực tế.",
+      "Chưa có kết luận xác nhận cảm biến hỏng."
+    ],
+    "evidence_source": "transcript_demo_DR-001.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  },
+  {
+    "case_id": "DR-002",
+    "title": "Lỗi tín hiệu xuất hiện không liên tục",
+    "machine": "Trạm kiểm tra tự động",
+    "status": "approved",
+    "problem": "Tín hiệu đầu vào thỉnh thoảng mất rồi tự phục hồi.",
+    "context": "Hồ sơ mô phỏng có hiện tượng tương tự lỗi tín hiệu chập chờn.",
+    "observations": [
+      {
+        "text": "Lỗi xảy ra không liên tục; chưa đủ dữ liệu để quy kết cho riêng cảm biến.",
+        "evidence": "Cần phân biệt lỗi cảm biến với giắc nối hoặc dây dẫn.",
+        "time": "00:03:05–00:03:26"
+      }
+    ],
+    "options": [
+      {
+        "name": "Kiểm tra dây và giắc khi theo dõi tín hiệu",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Có thể giúp phân biệt lỗi kết nối với lỗi linh kiện."
+      },
+      {
+        "name": "Thay cảm biến ngay",
+        "status": "chưa chọn",
+        "reason": "Chưa có bằng chứng cô lập được lỗi ở cảm biến."
+      }
+    ],
+    "decision": "Ghi nhận trạng thái tín hiệu và kiểm tra kết nối trước khi thay linh kiện.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Không có số đo điện áp hoặc waveform.",
+      "Chưa có kết quả sửa chữa cuối cùng."
+    ],
+    "evidence_source": "transcript_demo_DR-002.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  },
+  {
+    "case_id": "DR-003",
+    "title": "Cảm biến báo sai sau khi bảo trì",
+    "machine": "Cụm định vị chi tiết",
+    "status": "approved",
+    "problem": "Sau một lần bảo trì, tín hiệu vị trí không còn ổn định như trước.",
+    "context": "Tình huống mô phỏng liên quan đến cảm biến và gá lắp.",
+    "observations": [
+      {
+        "text": "Thời điểm xuất hiện lỗi có liên quan về mặt thời gian đến hoạt động bảo trì, nhưng chưa chứng minh quan hệ nhân quả.",
+        "evidence": "Cần kiểm tra lại vị trí lắp và trạng thái kết nối sau bảo trì.",
+        "time": "00:04:10–00:04:34"
+      }
+    ],
+    "options": [
+      {
+        "name": "Kiểm tra vị trí lắp và kết nối sau bảo trì",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Kiểm tra các thay đổi gần thời điểm lỗi xuất hiện."
+      },
+      {
+        "name": "Kết luận cảm biến hỏng",
+        "status": "chưa chọn",
+        "reason": "Chưa có phép đo xác nhận."
+      }
+    ],
+    "decision": "Kiểm tra lại lắp đặt và kết nối, sau đó xác minh bằng tín hiệu đo.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Chưa có ảnh lắp đặt trước/sau.",
+      "Chưa có kết quả đo và thử nghiệm xác nhận."
+    ],
+    "evidence_source": "transcript_demo_DR-003.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  },
+  {
+    "case_id": "DR-004",
+    "title": "Rung động tăng sau khi thay cụm truyền động",
+    "machine": "Cụm truyền động",
+    "status": "approved",
+    "problem": "Rung động tăng sau khi thay một cụm truyền động.",
+    "context": "Hồ sơ mô phỏng về đánh giá nguyên nhân cơ khí.",
+    "observations": [
+      {
+        "text": "Rung động tăng sau thay thế; cần kiểm tra căn chỉnh và lắp đặt trước khi kết luận hỏng chi tiết.",
+        "evidence": "Đề xuất đo rung và kiểm tra căn chỉnh theo quy trình bảo trì.",
+        "time": "00:02:20–00:02:45"
+      }
+    ],
+    "options": [
+      {
+        "name": "Đo rung và kiểm tra căn chỉnh",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Thu thập dữ liệu trước khi thay thêm linh kiện."
+      },
+      {
+        "name": "Thay ổ bi ngay",
+        "status": "chưa chọn",
+        "reason": "Chưa có bằng chứng khoanh vùng ổ bi."
+      }
+    ],
+    "decision": "Đo rung, kiểm tra căn chỉnh và đối chiếu thông số cho phép trước khi quyết định sửa tiếp.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Chưa có giá trị rung đo được.",
+      "Chưa có ngưỡng giới hạn của nhà sản xuất."
+    ],
+    "evidence_source": "transcript_demo_DR-004.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  },
+  {
+    "case_id": "DR-005",
+    "title": "Nhiệt độ cụm gia nhiệt dao động",
+    "machine": "Cụm gia nhiệt",
+    "status": "approved",
+    "problem": "Nhiệt độ hiển thị dao động, chất lượng đầu ra không ổn định.",
+    "context": "Hồ sơ mô phỏng về kiểm tra tín hiệu đo và phần gia nhiệt.",
+    "observations": [
+      {
+        "text": "Chưa phân biệt được lỗi cảm biến nhiệt, dây dẫn hay bộ điều khiển.",
+        "evidence": "Cần so sánh giá trị hiển thị với thiết bị đo độc lập và kiểm tra kết nối.",
+        "time": "00:05:02–00:05:29"
+      }
+    ],
+    "options": [
+      {
+        "name": "Xác minh phép đo và kết nối",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Tránh thay linh kiện khi chưa xác định khâu gây sai lệch."
+      },
+      {
+        "name": "Thay bộ điều khiển",
+        "status": "chưa chọn",
+        "reason": "Chưa có bằng chứng bộ điều khiển là nguồn lỗi."
+      }
+    ],
+    "decision": "Xác minh phép đo, kết nối và điều kiện vận hành trước khi khoanh vùng linh kiện.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Chưa có dữ liệu nhiệt độ độc lập.",
+      "Chưa có kết quả kiểm tra sau sửa."
+    ],
+    "evidence_source": "transcript_demo_DR-005.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  },
+  {
+    "case_id": "DR-006",
+    "title": "Lỗi chỉ xuất hiện khi máy chạy liên tục",
+    "machine": "Trạm tự động hóa",
+    "status": "approved",
+    "problem": "Máy vận hành bình thường lúc đầu nhưng lỗi xuất hiện sau một thời gian chạy.",
+    "context": "Hồ sơ mô phỏng về lỗi phụ thuộc điều kiện vận hành.",
+    "observations": [
+      {
+        "text": "Điều kiện và thời điểm xuất hiện lỗi cần được ghi nhận trước khi kết luận.",
+        "evidence": "Đề xuất ghi lại thời gian chạy, trạng thái máy và tín hiệu tại thời điểm lỗi.",
+        "time": "00:06:15–00:06:41"
+      }
+    ],
+    "options": [
+      {
+        "name": "Ghi nhận điều kiện lỗi và tái hiện có kiểm soát",
+        "status": "ưu tiên kiểm tra",
+        "reason": "Giúp xác định lỗi có phụ thuộc thời gian hoặc điều kiện vận hành không."
+      },
+      {
+        "name": "Thay linh kiện theo phỏng đoán",
+        "status": "chưa chọn",
+        "reason": "Không có bằng chứng đủ để xác định linh kiện cần thay."
+      }
+    ],
+    "decision": "Thu thập điều kiện xảy ra lỗi và dữ liệu tín hiệu trước khi quyết định hành động sửa chữa.",
+    "root_cause": "Chưa xác nhận",
+    "root_cause_status": "unconfirmed",
+    "limitations": [
+      "Chưa có log máy theo thời gian.",
+      "Chưa xác định điều kiện tái hiện lỗi."
+    ],
+    "evidence_source": "transcript_demo_DR-006.txt",
+    "reviewer": "Kỹ sư duyệt (mô phỏng)"
+  }
+]

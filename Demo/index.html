@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expert Trace | AI Knowledge Assistant</title>
+<style>
+:root{--bg:#0a1022;--panel:#111a34;--panel2:#172344;--line:#27375e;--text:#edf4ff;--muted:#9eafd0;--cyan:#42d6ff;--blue:#438bff;--green:#5ce0b0;--amber:#ffcf70;--red:#ff8e9b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#142b55 0,transparent 45%),var(--bg);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--text);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#1a2a50;color:var(--text);border-radius:10px;padding:10px 13px;transition:.15s}button:hover{border-color:var(--cyan);transform:translateY(-1px)}button.primary{background:linear-gradient(120deg,#177eb5,#345ee8);border:0;font-weight:700}button.small{font-size:12px;padding:6px 9px}
+.app{max-width:1440px;margin:auto;padding:18px;display:grid;grid-template-columns:270px minmax(0,1fr);gap:16px;min-height:100vh}
+.sidebar,.main{background:rgba(15,24,49,.94);border:1px solid var(--line);border-radius:18px;min-height:calc(100vh - 36px);overflow:hidden}
+.sidebar{padding:20px;display:flex;flex-direction:column;gap:20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(140deg,#123a64,#0d1a39);border:1px solid #2c5d91;display:grid;place-items:center;color:var(--cyan);font-size:23px}.brand h1{font-size:16px;margin:0}.brand p{font-size:11px;color:var(--muted);margin:2px 0 0;letter-spacing:1.2px}
+.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700}.nav{display:grid;gap:7px}.nav button{text-align:left;background:transparent;border-color:transparent;color:#bdc9e3}.nav button.active{background:#1a2d53;border-color:#2e4c7c;color:var(--cyan)}
+.card{background:linear-gradient(145deg,#152344,#101a33);border:1px solid var(--line);border-radius:14px;padding:14px}.card h3{font-size:13px;margin:0 0 9px;color:#cfe5ff}.metric{font-size:25px;font-weight:800;color:var(--cyan)}.muted{color:var(--muted)}.tiny{font-size:12px}.status{display:inline-flex;align-items:center;gap:6px;font-size:11px;border:1px solid #345578;color:var(--green);padding:4px 8px;border-radius:99px}.dot{width:6px;height:6px;border-radius:50%;background:currentColor}.sidebar .foot{margin-top:auto;color:#7588ae;font-size:11px}
+.main{display:flex;flex-direction:column}.topbar{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.topbar h2{margin:0;font-size:20px}.topbar p{margin:3px 0 0;color:var(--muted);font-size:12px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 285px;flex:1;min-height:0}.chatcol{display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--line)}.chathead{padding:14px 20px;border-bottom:1px solid #202e4d;display:flex;justify-content:space-between;align-items:center}.chathead strong{font-size:13px}.messages{padding:20px;display:flex;flex-direction:column;gap:16px;overflow:auto;min-height:400px;max-height:calc(100vh - 240px)}.welcome{border:1px solid #284b76;background:linear-gradient(130deg,#152d50,#151d3a);border-radius:16px;padding:20px}.welcome h3{font-size:20px;margin:0 0 6px}.welcome p{color:#b8c9e6;margin:0 0 14px}.suggestions{display:flex;flex-wrap:wrap;gap:8px}.suggestions button{font-size:12px;text-align:left;background:#152746}
+.message{display:flex;gap:10px;align-items:flex-start;max-width:900px}.message.user{align-self:flex-end;flex-direction:row-reverse}.avatar{flex:0 0 32px;width:32px;height:32px;border-radius:10px;background:#1a365d;display:grid;place-items:center;color:var(--cyan);font-weight:800;font-size:12px}.user .avatar{background:#3151a3;color:#fff}.bubble{max-width:calc(100% - 42px);border:1px solid #28385e;background:#121f3b;border-radius:4px 14px 14px 14px;padding:13px 15px;white-space:normal}.user .bubble{background:#1a3261;border-color:#36599b;border-radius:14px 4px 14px 14px}.bubble p{margin:0 0 9px}.bubble p:last-child{margin-bottom:0}.bubble h4{margin:12px 0 6px;color:#8fe6ff;font-size:13px}.bubble ul{padding-left:19px;margin:5px 0 10px}.bubble li{margin:4px 0}.source{border:1px solid #355174;border-radius:10px;padding:10px;margin-top:10px;background:#0c1730}.source-head{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:700;color:#a8eaff}.tag{font-size:10px;padding:3px 6px;border-radius:6px;background:#183d3e;color:#8ff0c9}.source blockquote{margin:7px 0 0;padding-left:10px;border-left:2px solid #3c9ac4;color:#c4d3e9;font-size:12px}.flag{font-size:12px;color:var(--amber);background:#3b2d18;border:1px solid #76572a;border-radius:8px;padding:8px;margin-top:10px}.composer{padding:15px 18px;border-top:1px solid var(--line);background:#0e1830}.inputrow{display:flex;gap:9px}.inputrow input{flex:1;min-width:0;background:#0a142a;border:1px solid #304366;border-radius:12px;padding:13px 14px;color:var(--text);outline:none}.inputrow input:focus{border-color:var(--cyan)}.composefoot{display:flex;justify-content:space-between;gap:10px;margin-top:8px;color:#7e91b8;font-size:11px}
+.right{padding:17px;display:flex;flex-direction:column;gap:13px}.right h3{font-size:13px;margin:0}.quicklist{display:grid;gap:7px}.quicklist button{text-align:left;font-size:12px;background:#111e3a}.case{padding:10px 0;border-bottom:1px solid #283758}.case:last-child{border:0}.case strong{display:block;font-size:12px}.case span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.case button{margin-top:7px}
+.panel{padding:22px}.panel h2{margin:0 0 5px}.panel p{color:var(--muted)}.table{width:100%;border-collapse:collapse;font-size:13px}.table td,.table th{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{color:#9fe9ff}.hidden{display:none!important}.toast{position:fixed;bottom:20px;right:20px;background:#183d3e;border:1px solid #347f70;padding:10px 14px;border-radius:10px;display:none}
+@media(max-width:1050px){.app{grid-template-columns:220px minmax(0,1fr)}.workspace{grid-template-columns:minmax(0,1fr)}.right{display:none}.chatcol{border-right:0}}
+@media(max-width:700px){.app{display:block;padding:8px}.sidebar{min-height:0;margin-bottom:8px;padding:12px}.sidebar .nav,.sidebar .stats,.sidebar .foot{display:none}.main{min-height:calc(100vh - 110px)}.topbar{padding:14px}.messages{padding:12px;max-height:none;min-height:55vh}.composer{padding:12px}.topbar .status{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">✦</div><div><h1>EXPERT TRACE</h1><p>KNOWLEDGE ASSISTANT</p></div></div>
+  <div><div class="eyebrow" style="margin-bottom:8px">Workspace</div><div class="nav">
+    <button class="active" data-view="chat">✦ &nbsp; AI Assistant</button>
+    <button data-view="knowledge">▤ &nbsp; Knowledge Base</button>
+    <button data-view="process">⌘ &nbsp; Trace Pipeline</button>
+  </div></div>
+  <div class="stats card"><h3>Demo Knowledge Base</h3><div class="metric" id="caseCount">6</div><div class="muted tiny">hồ sơ tình huống mô phỏng</div><div style="height:12px"></div><div class="status"><span class="dot"></span> Demo mode · không cần API</div></div>
+  <div class="card"><h3>Nguyên tắc tin cậy</h3><div class="tiny muted">Câu trả lời chỉ dựa trên dữ liệu demo. Thông tin chưa có bằng chứng sẽ được đánh dấu, không tự suy đoán nguyên nhân.</div></div>
+  <div class="foot">EXPERT TRACE · A2 PROTOTYPE<br>Local demo · Sample data only</div>
+</aside>
+<main class="main">
+  <header class="topbar"><div><h2 id="pageTitle">AI Knowledge Assistant</h2><p id="pageSubtitle">Truy xuất kinh nghiệm, bằng chứng và lý do ra quyết định</p></div><div class="status"><span class="dot"></span> LOCAL DEMO</div></header>
+  <section id="chatView" class="workspace">
+    <div class="chatcol">
+      <div class="chathead"><strong>✦ Trợ lý tri thức chuyên gia</strong><button class="small" id="clearBtn">Cuộc trò chuyện mới</button></div>
+      <div class="messages" id="messages">
+        <div class="welcome" id="welcome"><h3>Xin chào, tôi là Expert Trace.</h3><p>Tôi giúp tìm lại những gì đã được ghi nhận trong các phiên trao đổi chuyên gia, kèm bằng chứng nguồn. Đây là dữ liệu minh họa, không phải hướng dẫn sửa chữa máy thật.</p><div class="suggestions">
+          <button data-q="Vì sao nhóm chọn kiểm tra cảm biến trước khi thay linh kiện?">Vì sao chọn kiểm tra cảm biến trước?</button>
+          <button data-q="Có bằng chứng nào xác nhận nguyên nhân gốc rễ không?">Có bằng chứng xác nhận root cause?</button>
+          <button data-q="Tìm trường hợp tương tự về tín hiệu cảm biến chập chờn">Tìm trường hợp tương tự</button>
+          <button data-q="Những thông tin nào còn chưa được xác minh?">Thông tin nào chưa xác minh?</button>
+        </div></div>
+      </div>
+      <form class="composer" id="chatForm"><div class="inputrow"><input id="question" autocomplete="off" placeholder="Hỏi về vấn đề, phương án, bằng chứng..." aria-label="Câu hỏi"/><button class="primary" type="submit">Gửi ↗</button></div><div class="composefoot"><span>Enter để gửi · Không kết nối dịch vụ bên ngoài</span><span>Evidence-first answers</span></div></form>
+    </div>
+    <aside class="right">
+      <div><h3>Gợi ý câu hỏi</h3><div class="quicklist" style="margin-top:9px">
+        <button data-q="Tóm tắt vấn đề và quyết định của case DR-001">Tóm tắt case DR-001</button>
+        <button data-q="Phương án nào đã bị loại bỏ và vì sao?">Phương án bị loại bỏ</button>
+        <button data-q="Tôi có thể áp dụng quyết định này trong mọi điều kiện không?">Giới hạn áp dụng</button>
+        <button data-q="Tìm các case có triệu chứng tương tự">So sánh các case</button>
+      </div></div>
+      <div class="card"><h3>Knowledge quality</h3><div class="tiny muted" style="margin-top:8px">✓ Bằng chứng nguồn<br>✓ Tách sự kiện và giả thuyết<br>✓ Hiển thị thông tin còn thiếu<br>✓ Không tự tạo số liệu</div></div>
+      <div><h3>Hồ sơ nổi bật</h3><div id="featuredCases"></div></div>
+    </aside>
+  </section>
+  <section id="knowledgeView" class="panel hidden">
+    <h2>Knowledge Base</h2><p>Hồ sơ mô phỏng đã được cấu trúc từ transcript Design Review. Chọn một hồ sơ để hỏi trợ lý.</p>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>Mã hồ sơ</th><th>Vấn đề</th><th>Quyết định được ghi nhận</th><th>Trạng thái</th><th></th></tr></thead><tbody id="knowledgeRows"></tbody></table></div>
+    <div class="card" style="margin-top:16px"><h3>Phân biệt dữ liệu</h3><p class="tiny">Đây là dữ liệu tổng hợp để demo giao diện và hành vi truy xuất. Chưa phải tri thức được DENSO/BTC cung cấp hoặc chuyên gia thực tế xác nhận.</p></div>
+  </section>
+  <section id="processView" class="panel hidden">
+    <h2>Trace Pipeline</h2><p>Luồng nghiệp vụ đề xuất từ tài liệu nguồn đến tri thức có thể tái sử dụng.</p>
+    <div class="table">
+      <div class="case"><strong>01 · Thu nhận nguồn</strong><span>Video/audio Design Review, transcript và tài liệu liên quan. Giữ nguyên file gốc, quyền truy cập và nguồn gốc.</span></div>
+      <div class="case"><strong>02 · Chuyển lời nói thành văn bản</strong><span>STT + mốc thời gian; các đoạn nghe không rõ được đánh dấu thay vì tự điền.</span></div>
+      <div class="case"><strong>03 · Trích xuất Decision Trace</strong><span>Vấn đề, quan sát, phương án, lý do được nêu, quyết định, rủi ro và câu hỏi còn mở.</span></div>
+      <div class="case"><strong>04 · Gắn bằng chứng</strong><span>Mỗi nhận định liên kết về transcript/timestamp hoặc tài liệu. Không có nguồn thì đánh dấu thiếu bằng chứng.</span></div>
+      <div class="case"><strong>05 · Chuyên gia xác nhận</strong><span>Chỉnh sửa, phê duyệt hoặc từ chối trước khi đưa vào kho tri thức chính thức.</span></div>
+      <div class="case"><strong>06 · Trợ lý tìm kiếm</strong><span>Truy xuất hồ sơ tương tự, trả lời có nguồn và nêu rõ giới hạn áp dụng.</span></div>
+    </div>
+  </section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="data/cases.js"></script>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const messages=$('#messages'), input=$('#question');
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function showToast(s){const t=$('#toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function sourceHtml(c, ev){if(!ev||!ev.length)return '';return `<h4>Bằng chứng nguồn</h4>${ev.map(e=>`<div class="source"><div class="source-head"><span>${esc(e.source)} · ${esc(e.time||'mốc thời gian chưa có')}</span><span class="tag">${esc(e.type||'Transcript')}</span></div><blockquote>“${esc(e.quote)}”</blockquote></div>`).join('')}`}
+function makeAnswer(q){
+ const norm=q.toLowerCase();
+ let ranked=CASES.map(c=>({c,score:scoreCase(norm,c)})).sort((a,b)=>b.score-a.score);
+ let found=ranked.filter(x=>x.score>0).slice(0,3).map(x=>x.c);
+ if(!found.length) {
+   if(/chưa xác minh|thiếu|chưa có|bằng chứng|root cause|nguyên nhân gốc/.test(norm)) found=CASES.filter(c=>c.unknown && c.unknown.length).slice(0,2);
+   else found=ranked.slice(0,1).map(x=>x.c);
+ }
+ const c=found[0];
+ let html='', evid=[];
+ if(/tương tự|so sánh|case|trường hợp|hồ sơ/.test(norm) && found.length>1){
+   html='<p>Tôi tìm thấy các hồ sơ demo có chủ đề gần với câu hỏi. Mức độ tương tự dưới đây dựa trên từ khóa và trường thông tin mẫu, không phải đánh giá kỹ thuật đã được chuyên gia xác nhận.</p><ul>';
+   found.forEach(x=>html+=`<li><b>${esc(x.id)} — ${esc(x.title)}</b>: ${esc(x.problem)}</li>`);
+   html+='</ul>';
+ } else {
+   html=`<p><b>${esc(c.id)} — ${esc(c.title)}</b></p><p><b>Vấn đề được ghi nhận:</b> ${esc(c.problem)}</p><p><b>Quyết định trong dữ liệu demo:</b> ${esc(c.decision)}</p>`;
+   if(/vì sao|lý do|phương án|loại bỏ|quyết định|cân nhắc/.test(norm)){
+     html+=`<h4>Dấu vết ra quyết định</h4><ul>${c.reasoning.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+     if(c.rejected&&c.rejected.length) html+=`<h4>Phương án chưa chọn</h4><ul>${c.rejected.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+   }
+   if(/giới hạn|mọi điều kiện|rủi ro|an toàn|áp dụng/.test(norm)) html+=`<h4>Giới hạn và lưu ý</h4><ul>${c.limits.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+   evid=c.evidence||[];
+   if(/chưa xác minh|thiếu|bằng chứng|root cause|nguyên nhân gốc/.test(norm)){
+     html+=`<h4>Thông tin chưa được xác minh</h4><ul>${c.unknown.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+   }
+ }
+ html+=sourceHtml(c,evid);
+ if(c.unknown&&c.unknown.length) html+=`<div class="flag">⚠ Chưa đủ căn cứ để khẳng định mọi giả thuyết là nguyên nhân gốc rễ. Cần chuyên gia xác nhận trước khi áp dụng thực tế.</div>`;
+ html+=`<p class="tiny muted" style="margin-top:10px">Nguồn trả lời: dữ liệu mô phỏng trong demo. Không dùng nội dung này làm chỉ dẫn sửa chữa hoặc quyết định an toàn trên máy thật.</p>`;
+ return html;
+}
+function scoreCase(q,c){let hay=[c.id,c.title,c.problem,c.decision,...c.tags].join(' ').toLowerCase(),score=0;
+ const words=['cảm biến','sensor','tín hiệu','chập chờn','điện','cáp','rung','nhiệt','phương án','bằng chứng','root cause','nguyên nhân','quyết định','tương tự','case','dr-001','dr-002','dr-003','dr-004','dr-005','dr-006'];
+ words.forEach(w=>{if(q.includes(w)&&hay.includes(w))score+=2});
+ c.tags.forEach(w=>{if(q.includes(w.toLowerCase()))score+=3});
+ q.split(/[\s,?.!]+/).filter(w=>w.length>3).forEach(w=>{if(hay.includes(w))score+=1});
+ if(q.includes(c.id.toLowerCase()))score+=10;
+ return score;
+}
+function appendMessage(role,htmlOrText,isHtml=false){const wrap=document.createElement('div');wrap.className='message '+role;wrap.innerHTML=`<div class="avatar">${role==='user'?'BẠN':'ET'}</div><div class="bubble">${isHtml?htmlOrText:`<p>${esc(htmlOrText)}</p>`}</div>`;messages.appendChild(wrap);messages.scrollTop=messages.scrollHeight;}
+function ask(q){if(!q.trim())return;$('#welcome')?.remove();appendMessage('user',q);appendMessage('bot',makeAnswer(q),true);input.value='';input.focus();}
+$('#chatForm').addEventListener('submit',e=>{e.preventDefault();ask(input.value)});
+$('#clearBtn').addEventListener('click',()=>{messages.innerHTML='';messages.appendChild(document.createRange().createContextualFragment(`<div class="welcome" id="welcome"><h3>Cuộc trò chuyện mới</h3><p>Hãy hỏi về vấn đề, bằng chứng hoặc quyết định được ghi nhận.</p><div class="suggestions"><button data-q="Vì sao nhóm chọn kiểm tra cảm biến trước khi thay linh kiện?">Vì sao chọn kiểm tra cảm biến trước?</button><button data-q="Có bằng chứng nào xác nhận nguyên nhân gốc rễ không?">Có bằng chứng xác nhận root cause?</button></div></div>`));wireQs();});
+function wireQs(){$$('[data-q]').forEach(b=>{if(b.dataset.wired)return;b.dataset.wired='1';b.addEventListener('click',()=>ask(b.dataset.q));});}
+function view(name){['chat','knowledge','process'].forEach(v=>$('#'+v+'View').classList.toggle('hidden',v!==name));$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));const data={chat:['AI Knowledge Assistant','Truy xuất kinh nghiệm, bằng chứng và lý do ra quyết định'],knowledge:['Knowledge Base','Các hồ sơ tình huống mô phỏng'],process:['Trace Pipeline','Quy trình từ dữ liệu thô đến tri thức được xác nhận']}[name];$('#pageTitle').textContent=data[0];$('#pageSubtitle').textContent=data[1];}
+$$('[data-view]').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));
+function fillKnowledge(){
+ $('#caseCount').textContent=CASES.length;
+ $('#knowledgeRows').innerHTML=CASES.map(c=>`<tr><td><b>${esc(c.id)}</b></td><td>${esc(c.problem)}</td><td>${esc(c.decision)}</td><td><span class="tag">Mô phỏng · chưa duyệt</span></td><td><button class="small" data-askcase="${esc(c.id)}">Hỏi về case</button></td></tr>`).join('');
+ $('#featuredCases').innerHTML=CASES.slice(0,3).map(c=>`<div class="case"><strong>${esc(c.id)} · ${esc(c.title)}</strong><span>${esc(c.problem)}</span><button class="small" data-askcase="${esc(c.id)}">Mở hồ sơ</button></div>`).join('');
+ $$('[data-askcase]').forEach(b=>b.addEventListener('click',()=>{view('chat');ask('Tóm tắt vấn đề, quyết định và bằng chứng của '+b.dataset.askcase)}));
+}
+wireQs();fillKnowledge();
+</script>
+</body></html>
