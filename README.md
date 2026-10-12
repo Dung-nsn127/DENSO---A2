@@ -66,7 +66,7 @@ Video/Audio Design Review + tài liệu bối cảnh
                     │
                     ▼
         3. Làm rõ người nói và thuật ngữ
-           (nếu dữ liệu hỗ trợ; đánh dấu phần không rõ)
+           (sử dụng công cụ phân biệt tần số âm thanh)
                     │
                     ▼
         4. LLM trích xuất Decision Trace
@@ -230,11 +230,8 @@ do BTC cung cấp hoặc tiêu chuẩn đã được doanh nghiệp phê duyệt
                                                   dữ liệu nhạy cảm
   -----------------------------------------------------------------------
 
-Không nên khóa lựa chọn model trước khi có dữ liệu BTC. Cần thử trên một
-tập đại diện để so sánh độ chính xác trích xuất, khả năng bám bằng
-chứng, tốc độ, bảo mật và tổng chi phí.
 
-## 7. Mô hình chi phí Prototype (ước tính minh họa)
+## 7. Mô hình chi phí Prototype 
 
 Các giá trị dưới đây là giả định để lập ngân sách ban đầu, không phải
 báo giá chính thức. Có thể thay bằng báo giá và dữ liệu sử dụng thực tế.
@@ -265,8 +262,6 @@ báo giá chính thức. Có thể thay bằng báo giá và dữ liệu sử d�
   duyệt**                                       
   -----------------------------------------------------------------------
 
-Nếu tạm quy đổi theo 1 USD = 26.000 VNĐ, tổng ngân sách khoảng **32,1
-triệu VNĐ**. Tỷ giá chỉ để tham khảo.
 
 ### Cách diễn giải chi phí
 
